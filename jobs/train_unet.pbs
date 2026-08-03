@@ -1,0 +1,33 @@
+
+#!/bin/bash
+#PBS -N hpcmedvision_train
+#PBS -q gpu
+#PBS -l select=1:ncpus=4:naccelerators=1
+#PBS -l walltime=00:40:00
+#PBS -o /home/jiitcah.04/HPC-MedVision/results/train_job.out
+#PBS -e /home/jiitcah.04/HPC-MedVision/results/train_job.err
+
+# HPC-MedVision - Phase 7: Batch U-Net training job
+# Automatically resumes from the last checkpoint via train.py's built-in logic.
+# Re-submit this same script multiple times to continue training further;
+# adjust TARGET_EPOCHS below as needed.
+
+TARGET_EPOCHS=35
+
+echo "=== Job started on $(hostname) at $(date) ==="
+
+module load cuda12.2/toolkit/12.2.2
+module load gcc/12.2.0
+module load anaconda3/anaconda
+source ~/.bashrc
+conda activate hpcmedvision
+
+nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv
+export CUDA_VISIBLE_DEVICES=4
+
+cd /home/jiitcah.04/HPC-MedVision/unet
+
+echo "--- Training toward epoch $TARGET_EPOCHS ---"
+python3 train.py --epochs $TARGET_EPOCHS
+
+echo "=== Job finished at $(date) ==="

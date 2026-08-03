@@ -1,0 +1,15 @@
+=== HPC-MedVision Test Set Evaluation ===
+Checkpoint epoch: 34
+Test set size: 589 images
+-----------------------------------
+Dice Score:  0.6980
+IoU:         0.5361
+Precision:   0.8649
+Recall:      0.5851
+Accuracy:    0.9948
+-----------------------------------
+Total pixels evaluated: 9,650,176
+True Positive pixels:  57,892
+False Positive pixels: 9,041
+False Negative pixels: 41,057
+True Negative pixels:  9,542,186

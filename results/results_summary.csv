@@ -1,0 +1,19 @@
+Category,Configuration,Speedup,Value,Notes
+Preprocessing,"Sequential (CPU, 1 core)",-,75.676,"seconds (avg of 3 runs, 3929 images)"
+Preprocessing,OpenMP (1 threads),0.99x,76.428,"seconds (avg of 3 runs, 3929 images)"
+Preprocessing,OpenMP (2 threads),1.89x,39.992,"seconds (avg of 3 runs, 3929 images)"
+Preprocessing,OpenMP (4 threads),3.38x,22.362,"seconds (avg of 3 runs, 3929 images)"
+Preprocessing,OpenMP (8 threads),5.33x,14.189,"seconds (avg of 3 runs, 3929 images)"
+Preprocessing,OpenMP (16 threads),5.55x,13.647,"seconds (avg of 3 runs, 3929 images)"
+Preprocessing,OpenMP (32 threads),6.00x,12.621,"seconds (avg of 3 runs, 3929 images)"
+CUDA Kernel,gaussian_blur (cold/1st launch),-,26.8623,ms (includes CUDA init)
+CUDA Kernel,gaussian_blur (warm/steady-state),-,0.0152,ms (avg of 19 images)
+CUDA Kernel,histogram_equalization (cold/1st launch),-,0.1224,ms (includes CUDA init)
+CUDA Kernel,histogram_equalization (warm/steady-state),-,0.0846,ms (avg of 19 images)
+CUDA Kernel,sobel (cold/1st launch),-,0.0250,ms (includes CUDA init)
+CUDA Kernel,sobel (warm/steady-state),-,0.0122,ms (avg of 19 images)
+U-Net Evaluation,Dice Score,-,0.6980,"test set, 589 images, 17 patients"
+U-Net Evaluation,IoU,-,0.5361,"test set, 589 images, 17 patients"
+U-Net Evaluation,Precision,-,0.8649,"test set, 589 images, 17 patients"
+U-Net Evaluation,Recall,-,0.5851,"test set, 589 images, 17 patients"
+U-Net Evaluation,Accuracy,-,0.9948,"test set, 589 images, 17 patients"

@@ -1,0 +1,32 @@
+
+#!/bin/bash
+#PBS -N hpcmedvision_cpu
+#PBS -q workq
+#PBS -l select=1:ncpus=32
+#PBS -l walltime=00:30:00
+#PBS -o /home/jiitcah.04/HPC-MedVision/results/cpu_job.out
+#PBS -e /home/jiitcah.04/HPC-MedVision/results/cpu_job.err
+
+# HPC-MedVision - Phase 7: Batch CPU job (Sequential + OpenMP preprocessing)
+# NOTE: preprocess_seq and preprocess_omp take NO command-line arguments.
+# They rely on hardcoded relative paths (../data/raw/kaggle_3m, ../data/processed),
+# so this script MUST cd into the openmp/ directory before running them.
+
+echo "=== Job started on $(hostname) at $(date) ==="
+
+module load anaconda3/anaconda
+module load gcc/12.2.0
+source ~/.bashrc
+conda activate hpcmedvision
+
+cd /home/jiitcah.04/HPC-MedVision/openmp
+
+echo "--- Running sequential baseline ---"
+./preprocess_seq
+
+echo "--- Running OpenMP with 32 threads ---"
+export OMP_NUM_THREADS=32
+./preprocess_omp
+
+echo "=== Job finished at $(date) ==="
+

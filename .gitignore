@@ -1,0 +1,61 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# VS Code
+.vscode/
+
+# =========================
+# Dataset
+# =========================
+data/raw/
+data/processed/
+data/masks/
+
+# =========================
+# Model Checkpoints
+# =========================
+*.pth
+*.pt
+
+# =========================
+# Compiled Executables
+# =========================
+cuda/gaussian_blur
+cuda/sobel
+cuda/histogram_equalization
+cuda/cuda_benchmark
+openmp/preprocess_seq
+openmp/preprocess_omp
+
+# =========================
+# Test Images
+# =========================
+cuda/test_*.tif
+results/batch_*.tif
+
+# =========================
+# HPC Logs
+# =========================
+results/*.out
+results/*.err
+
+# =========================
+# Archives
+# =========================
+*.zip
+
+# =========================
+# Temporary
+# =========================
+*.tmp
+.DS_Store
+
+results/*.log

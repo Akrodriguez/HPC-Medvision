@@ -1,0 +1,39 @@
+#!/bin/bash
+#PBS -N hpcmedvision_gpu
+#PBS -q gpu
+#PBS -l select=1:ncpus=4:naccelerators=1
+#PBS -l walltime=00:30:00
+#PBS -o /home/jiitcah.04/HPC-MedVision/results/gpu_job.out
+#PBS -e /home/jiitcah.04/HPC-MedVision/results/gpu_job.err
+
+# HPC-MedVision - Phase 7: Batch GPU job (CUDA kernel testing)
+# NOTE: gaussian_blur, sobel, and histogram_equalization each take TWO
+# arguments: <input_image_path> <output_image_path>
+
+echo "=== Job started on $(hostname) at $(date) ==="
+
+module load cuda12.2/toolkit/12.2.2
+module load gcc/12.2.0
+module load anaconda3/anaconda
+source ~/.bashrc
+conda activate hpcmedvision
+
+# Check GPU status and pick a lightly-used device automatically
+nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv
+export CUDA_VISIBLE_DEVICES=4
+
+cd /home/jiitcah.04/HPC-MedVision/cuda
+
+SAMPLE_IMAGE=$(find /home/jiitcah.04/HPC-MedVision/data/raw/kaggle_3m -name "*.tif" | grep -v mask | head -1)
+echo "Using sample image: $SAMPLE_IMAGE"
+
+echo "--- Running Gaussian Blur ---"
+./gaussian_blur "$SAMPLE_IMAGE" /home/jiitcah.04/HPC-MedVision/results/batch_blur_output.tif
+
+echo "--- Running Sobel Edge Detection ---"
+./sobel "$SAMPLE_IMAGE" /home/jiitcah.04/HPC-MedVision/results/batch_sobel_output.tif
+
+echo "--- Running Histogram Equalization ---"
+./histogram_equalization "$SAMPLE_IMAGE" /home/jiitcah.04/HPC-MedVision/results/batch_histeq_output.tif
+
+echo "=== Job finished at $(date) ==="

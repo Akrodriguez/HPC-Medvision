@@ -170,6 +170,62 @@ conda activate hpcmedvision
 
 ---
 
+---
+
+# Results
+
+## OpenMP Speedup
+
+The OpenMP implementation achieved up to **6× preprocessing speedup** compared to the sequential implementation.
+
+![OpenMP Speedup](results/speedup_chart.png)
+
+---
+
+## Runtime Comparison
+
+Comparison of sequential and OpenMP execution times across different thread counts.
+
+![Runtime Comparison](results/runtime_chart.png)
+
+---
+
+## CUDA Warm-up Analysis
+
+Comparison of CUDA cold-start latency and steady-state kernel execution time.
+
+![CUDA Warm-up Analysis](results/cuda_warmup_chart.png)
+
+---
+
+## Training Curves
+
+Training and validation loss during U-Net training.
+
+![Loss Curve](results/loss_curve.png)
+
+Validation Dice Score over training epochs.
+
+![Dice Curve](results/dice_curve.png)
+
+---
+
+## Brain Tumor Segmentation Results
+
+Examples of predictions produced by the trained U-Net model on the test set.
+
+![Segmentation Results](results/segmentation_demo.png)
+
+---
+
+## CUDA Image Preprocessing
+
+Comparison of the original MRI image with Gaussian Blur, Sobel Edge Detection, and Histogram Equalization.
+
+![Preprocessing Demo](results/preprocessing_demo.png)
+
+---
+
 ## Key Learnings
 
 During this project I gained practical experience in:
